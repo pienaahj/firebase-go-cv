@@ -10,10 +10,11 @@ import (
 )
 
 const (
-	childPath        = "skill"
-	mainPath         = "/"
-	childPathCore    = "coreComp"
-	childPathCourses = "courses"
+	childPath                 = "skill"
+	mainPath                  = "/"
+	childPathCore             = "coreComp"
+	childPathCourses          = "courses"
+	childPathResponsibilities = "responsibilities"
 )
 
 // desired json structure in firebase:
@@ -34,6 +35,10 @@ type Courses struct {
 	DatePeriod     string `json:"datePeriod,omitempty"`
 	Institution    string `json:"institution,omitempty"`
 	Description    string `json:"description,omitempty"`
+}
+
+type Responsibilities struct {
+	Responsibility string `json:"responsibility,omitempty"`
 }
 
 var (
@@ -531,6 +536,21 @@ var (
 			Description:    "Programming course.",
 		},
 	}
+
+	myResponsililities = []Responsibilities{
+		{"Planning of technology"},
+		{"Team leadership"},
+		{"Staff management"},
+		{"Financial management"},
+		{"GIS management"},
+		{"Right-of-way management"},
+		{"Record keeping system management"},
+		{"Telecommunication site management"},
+		{"Business continuity management"},
+		{"Health and safety management"},
+		{"Contract management"},
+		{"Program management"},
+	}
 )
 
 func main() {
@@ -557,7 +577,7 @@ func main() {
 	// create the ref
 	ref := client.NewRef(mainPath)
 	// create the child node
-	childRef := ref.Child(childPathCourses)
+	childRef := ref.Child(childPathResponsibilities)
 	// childRef, err := newRef.Push(ctx, nil)
 	// if err != nil {
 	// 	log.Println("Error pushing child node:", err)
@@ -581,9 +601,18 @@ func main() {
 	// 		break
 	// 	}
 	// }
-
-	for i := 0; i < len(myCourses); i++ {
-		data := myCourses[i]
+	// Write the coourses to firebase
+	// for i := 0; i < len(myCourses); i++ {
+	// 	data := myCourses[i]
+	// 	err := writeNode(ctx, childRef, data)
+	// 	if err != nil {
+	// 		log.Printf("Error at writing to db at: %d\n", i)
+	// 		break
+	// 	}
+	// }
+	// Write the responsibilities to firebase
+	for i := 0; i < len(myResponsililities); i++ {
+		data := myResponsililities[i]
 		err := writeNode(ctx, childRef, data)
 		if err != nil {
 			log.Printf("Error at writing to db at: %d\n", i)
