@@ -10,11 +10,12 @@ import (
 )
 
 const (
-	childPath                 = "skill"
-	mainPath                  = "/"
-	childPathCore             = "coreComp"
-	childPathCourses          = "courses"
-	childPathResponsibilities = "responsibilities"
+	childPath                  = "skill"
+	mainPath                   = "/"
+	childPathCore              = "coreComp"
+	childPathCourses           = "courses"
+	childPathResponsibilities  = "responsibilities"
+	childPathEmploymentHistory = "employmentsHistory"
 )
 
 // desired json structure in firebase:
@@ -39,6 +40,18 @@ type Courses struct {
 
 type Responsibilities struct {
 	Responsibility string `json:"responsibility,omitempty"`
+}
+
+type EmploymentHistory struct {
+	JobTitle             string   `json:"jobTitle,omitempty"`
+	Place                string   `json:"place,omitempty"`
+	DurationPeriod       string   `json:"durationPeriod,omitempty"`
+	JobDescription1      string   `json:"jobDescription1,omitempty"`
+	JobDescription2      string   `json:"jobDescription2,omitempty"`
+	JobDescription3      string   `json:"jobDescription3,omitempty"`
+	JobResponsibilities1 []string `json:"jobResponsibilities1,omitempty"`
+	JobResponsibilities2 []string `json:"jobResponsibilities2,omitempty"`
+	JobResponsibilities3 []string `json:"jobResponsibilities3,omitempty"`
 }
 
 var (
@@ -537,6 +550,14 @@ var (
 		},
 	}
 
+	newCourse = Courses{
+		CourseTitle:    "Mastering Go Programming",
+		CourseCategory: "Golang/Development",
+		Completed:      "yes",
+		DatePeriod:     "2023-currently",
+		Institution:    "UDEMY Online",
+		Description:    "Programming course",
+	}
 	myResponsililities = []Responsibilities{
 		{"Planning of technology"},
 		{"Team leadership"},
@@ -550,6 +571,106 @@ var (
 		{"Health and safety management"},
 		{"Contract management"},
 		{"Program management"},
+	}
+
+	myEmploymentHistory = []EmploymentHistory{
+		{
+			JobTitle:       `Manager: Access Engineering, Fiber allocation and Engineering Operations, Telkom SA`,
+			Place:          "Port Elizabeth, South Africa",
+			DurationPeriod: "August 2012 to September 2014",
+			JobDescription1: `Managed 75 staff members reporting to eight supervisors, spread over the entire region in Port Elizabeth, George and East London. This included seven diverse work disciplines (access lines planning, regional operations and maintenance co-ordination of cable pair replacement recording, capturing of infrastructure records, GIS regional functions, regional right-of-way functions, radio site management and fiber pair allocations.)
+			My 2014 Operating budget was mR7.9 and the Capital budget (mR49 CAPEX, mR10 OPEX) to facilitate the financial year’s major electronic exchange conversion project to street cabinet exchange units (Fiber to the Cabinet - FTTC) (914 individual projects).
+			Special tasks: Development and maintenance of business continuity plans for the Telkom Southern Region (Southern Cape, Eastern Cape and Border areas).
+			`,
+		},
+		{
+			JobTitle:        "Manager: Access Engineering and Engineering Operations, Telkom SA",
+			Place:           "Port Elizabeth, South Africa",
+			DurationPeriod:  "September 2011 to July 2012",
+			JobDescription1: "Management of 40 staff members, sections included",
+			JobResponsibilities1: []string{
+				"Building cabling and customer premises facility management.",
+				"Regional operations and maintenance coordination of cable pair replacement recording.",
+				"Capturing of infrastructure records.",
+				"GIS regional functions.",
+				"Regional right-of-way functions.",
+				"Conformance testing.",
+				"Material management.",
+			},
+		},
+		{
+			JobTitle:       "Manager: Regional Engineering Operations, Telkom SA",
+			Place:          "Port Elizabeth, South Africa",
+			DurationPeriod: "July 2005 to August 2011",
+			JobDescription1: `Management of the engineering operation sections consisted of engineering support sections such as: Right-of-way, GIS and the engineering location records sections, building cabling and customer premises facility management for the Southern Region (Eastern Cape, Southern Cape and Border).  
+			As part of the national team responsible for the NETPLAN (GE Smallworld GIS) implementation in Telkom, roles and responsibilities included`,
+			JobResponsibilities1: []string{
+				"Revision of planning principles and procedures and spatial information requirements.",
+				"Guidelines of data capturing and management of regional contractor manned capturing teams and targets.",
+			},
+			JobDescription2: `Management of Southern region’s portion of NETDATA, a multi-year project, capturing network infrastructure of both physical, logical and equipment connections. 
+			Responsibilities included`,
+			JobResponsibilities2: []string{
+				"Capturing program including staffing models and budgets.",
+				"Data capturing targets management.",
+				"Quality management of captured data.",
+				"Control and management of the sourcing and verification of the record infrastructure data, undertaken by in house and contractor-based teams.",
+			},
+			JobDescription3: "The Operations section consisted of 38 staff members. Sections managed",
+			JobResponsibilities3: []string{
+				"Regional operations and maintenance coordination of cable pair replacement recording.",
+				"Capturing of infrastructure records sections.",
+				"GIS regional functions.",
+				"Regional right-of-way functions.",
+				"Material management (checking of estimated material with physical material available).",
+			},
+		},
+		{
+			JobTitle:             "Manager: Regional Network Engineering, Telkom SA",
+			Place:                "Port Elizabeth, South Africa",
+			DurationPeriod:       "July 2000 to June 2005",
+			JobDescription1:      "Name change, due to restructuring at Telkom with added responsibility for Southern Cape area.",
+			JobResponsibilities1: []string{},
+		},
+		{
+			JobTitle:       "Manager: Network Planning, Telkom SA",
+			Place:          "Port Elizabeth, South Africa",
+			DurationPeriod: "April 1999 to June 2000",
+			JobDescription1: `Manager of the Midlands lines planning section responsible for automation of rural farm lines and town planning of fix lines subscribers employing various technologies.
+			Responsibilities included`,
+			JobResponsibilities1: []string{
+				"General management of staff and contractors.",
+				"Liaison with ESCOM and local municipalities.",
+				"Coordinating and contribution to the compilation of national right-of-way documentation for Telkom",
+			},
+		},
+		{
+			JobTitle:       "Manager: Network Planning, Telkom SA",
+			Place:          "Port Elizabeth, South Africa",
+			DurationPeriod: "August 1992 to March 1999",
+			JobDescription1: `Senior Engineer Lines Planning (country and rural areas). Registered as professional engineer in 1993.
+			Heading planning teams in rural areas, involving farm line conversions with various technologies, such as, SOR18, RURTEL and point-to-point radio systems. 
+			This position evolved to the position of Senior Engineer Wireless Local Loop Planning: As planning team leader and planning project manager, leading teams consisting of in-house planning teams and in sourced planning teams from ESMARTEL, CSIR and ALCATEL, the Wireless conversion and connection of subscribers, spanning the entire Southern Region (greater Eastern Cape, Southern Cape and Ciskei/Transkei area) was planned (108 sites with 20 & 35 meter masts in urban areas 533 and in rural areas).  
+			The 1998/99 financial budget to provide 112 000 wireless links was mR350.  The tasks coordinated included: Site identification using GIS tools, WWL planning, detail planning, right-of-way procurement, planning acceptance and quality control, footprint verification.  In the process, special original, innovative tools were developed to enable rural subscribers to apply for service, installation teams to connect, and maintenance teams to provide point to multi point wireless network services.  
+			This was recognized by an innovation award from Telkom (see Key Achievements).`,
+			JobResponsibilities1: []string{},
+		},
+		{
+			JobTitle:             "Engineer, Telkom SA",
+			Place:                "Port Elizabeth, South Africa",
+			DurationPeriod:       "",
+			JobDescription1:      "",
+			JobResponsibilities1: []string{},
+		},
+		{
+			JobTitle:       "Engineer, Telkom SA",
+			Place:          "Port Elizabeth, South Africa",
+			DurationPeriod: "January 1989 to July 1992",
+			JobDescription1: `Engineer EWSD (German Electronic Switches) and later Engineer Electronic Exchanges (EWSD and E10 (French Electronic Switches).  This entailed operations and maintenance of all electronic exchanges in the Eastern Cape region.
+
+			`,
+			JobResponsibilities1: []string{},
+		},
 	}
 )
 
@@ -577,7 +698,7 @@ func main() {
 	// create the ref
 	ref := client.NewRef(mainPath)
 	// create the child node
-	childRef := ref.Child(childPathResponsibilities)
+	childRef := ref.Child(childPathCourses)
 	// childRef, err := newRef.Push(ctx, nil)
 	// if err != nil {
 	// 	log.Println("Error pushing child node:", err)
@@ -611,15 +732,23 @@ func main() {
 	// 	}
 	// }
 	// Write the responsibilities to firebase
-	for i := 0; i < len(myResponsililities); i++ {
-		data := myResponsililities[i]
-		err := writeNode(ctx, childRef, data)
-		if err != nil {
-			log.Printf("Error at writing to db at: %d\n", i)
-			break
-		}
-	}
-
+	// for i := 0; i < len(myResponsililities); i++ {
+	// 	data := myResponsililities[i]
+	// 	err := writeNode(ctx, childRef, data)
+	// 	if err != nil {
+	// 		log.Printf("Error at writing to db at: %d\n", i)
+	// 		break
+	// 	}
+	// }
+	// // Write the responsibilities to firebase
+	// for i := 0; i < len(myEmploymentHistory); i++ {
+	// 	data := myEmploymentHistory[i]
+	// 	err := writeNode(ctx, childRef, data)
+	// 	if err != nil {
+	// 		log.Printf("Error at writing to db at: %d\n", i)
+	// 		break
+	// 	}
+	// }
 	// As an admin, the app has access to read and write all data, regardless of Security Rules
 	// Read all the data at ref
 
@@ -630,9 +759,15 @@ func main() {
 	// }
 	// fmt.Println("Data from database:", data)
 
+	// Write the new course to firebase
+	data := newCourse
+	err = writeNode(ctx, childRef, data)
+	if err != nil {
+		log.Println("Error at writing new course to db")
+	}
 }
 
-// Write the skills to the skills node
+// Write the a course to the course node
 func writeNode(ctx context.Context, ref *db.Ref, data interface{}) error {
 	if _, err := ref.Push(ctx, &data); err != nil {
 		log.Printf("Error pushing %v: %v\n", data, err)
